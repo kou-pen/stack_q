@@ -15,6 +15,7 @@ void init_queue(queue_t*);
 void enqueue(queue_t*,int);
 int dequeue(queue_t*);
 void show_all(queue_t*);
+void peek(queue_t*);
 
 void exit(int status);/*強制終了用*/
 
@@ -75,6 +76,12 @@ void show_all(queue_t *queue){/*すべてdequeueしたあとにやるとバグ�
     printf("=======================\n");
 }
 
+void peek(queue_t *queue){
+    int returns;
+    returns = queue->data[queue->tail];
+    printf("%d\n",returns);
+}
+
 int main(void){
     int menu;
     int input;
@@ -84,7 +91,7 @@ int main(void){
     init_queue(&queue);
     system("cls");
     while(1){
-        printf("enqueue:1,dequeue:2,show_all:3,プログラムを終了:その他のキーかctrl+c\n");
+        printf("enqueue:1,dequeue:2,show_all:3,peek:4,プログラムを終了:その他のキーかctrl+c\n");
         printf(">>>");
         scanf("%d",&menu);
         switch (menu){
@@ -112,6 +119,11 @@ int main(void){
             case 3: /*show_all:3*/
                 system("cls");
                 show_all(&queue);
+                break;
+
+            case 4: /*peek*/
+                system("cls");
+                peek(&queue);
                 break;
 
             default:
